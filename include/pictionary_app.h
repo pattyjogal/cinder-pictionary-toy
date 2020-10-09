@@ -20,13 +20,17 @@ class PictionaryApp : public ci::app::App {
   void mouseDrag(ci::app::MouseEvent event) override;
   void keyDown(ci::app::KeyEvent event) override;
 
-  const int kCanvasSize = 750;
-  const int kWindowWidth = 1200;
-  const int kWindowHeight = 900;
-  const int kMargin = 100;
+  const size_t kCanvasSize = 750;
+  const size_t kWindowWidth = 1200;
+  const size_t kWindowHeight = 900;
+  const size_t kMargin = 100;
 
  private:
+  ci::Color GetNextColor();
+
   const double kGameSeconds = 30.0;
+  const double kTimeLow = 20.0;
+  const double kTimeCritical = 10.0;
   const ci::Color kAppBackgroundColor = ci::Color::black();
   const std::vector<ci::Color> kPenColors = {
     ci::Color("black"),
@@ -41,7 +45,5 @@ class PictionaryApp : public ci::app::App {
   std::chrono::time_point<std::chrono::system_clock> start_time_;
   double time_remaining_;
   bool is_timer_enabled_ = false;
-
-  ci::Color GetNextColor();
 };
 }  // namespace pictionary

@@ -5,7 +5,11 @@ namespace pictionary {
 using glm::vec2;
 using ci::Color;
 
-Canvas::Canvas(const glm::vec2 &top_left_corner, size_t pixels_x, size_t pixels_y, Color stroke_color, float brush_radius)
+Canvas::Canvas(const glm::vec2 &top_left_corner,
+               size_t pixels_x,
+               size_t pixels_y,
+               const Color &stroke_color,
+               float brush_radius)
   : top_left_corner_(top_left_corner),
     pixels_x_(pixels_x),
     pixels_y_(pixels_y),
@@ -20,7 +24,7 @@ void Canvas::Render() const {
   ci::gl::color(stroke_color_);
 
   if (!strokes_.empty()) {
-    for (const std::vector<vec2>& stroke : strokes_) {
+    for (const std::vector<vec2> &stroke : strokes_) {
       ci::gl::begin(GL_LINE_STRIP);
       ci::gl::lineWidth(5.0);
       for (const vec2 &point : stroke) {
@@ -42,11 +46,12 @@ void Canvas::ApplyStroke(const glm::vec2 &brush_screen_coords) {
   }
 }
 
-void Canvas::ChangeColor(const cinder::Color& color) {
+void Canvas::ChangeColor(const cinder::Color &color) {
   stroke_color_ = color;
 }
 
 void Canvas::Clear() {
   strokes_.clear();
 }
-}
+
+}  // namespace pictionary

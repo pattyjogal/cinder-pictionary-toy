@@ -7,15 +7,19 @@ namespace pictionary {
 
 class Canvas {
  public:
-  Canvas(const glm::vec2& top_left_corner, size_t pixels_x, size_t pixels_y, ci::Color stroke_color, float brush_radius = 1.15);
+  Canvas(const glm::vec2 &top_left_corner,
+         size_t pixels_x,
+         size_t pixels_y,
+         const ci::Color& stroke_color,
+         float brush_radius = 1.15);
 
   void Render() const;
 
   void CreateStroke();
 
-  void ApplyStroke(const glm::vec2& brush_screen_coords);
+  void ApplyStroke(const glm::vec2 &brush_screen_coords);
 
-  void ChangeColor(const cinder::Color& color);
+  void ChangeColor(const cinder::Color &color);
 
   void Clear();
 

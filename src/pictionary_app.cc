@@ -12,16 +12,20 @@ void PictionaryApp::draw() {
   // Draw the canvas
   canvas_.Render();
 
-  // Draw the color indicator
+  // Color indicator sizing
   size_t right_margin_width = kWindowWidth - kCanvasSize - kMargin;
   size_t right_margin_start = kWindowWidth - right_margin_width;
   size_t color_bar_margin = static_cast<size_t>(right_margin_width * .1);
   size_t color_bar_height = 20;
   size_t color_bar_padding = 10;
+
+  // Calculate positions for color indicator & padding
   ci::vec2 color_bar_topleft(right_margin_start + color_bar_margin, 150);
   ci::vec2 color_bar_bottomright(kWindowWidth - color_bar_margin, color_bar_topleft.y + color_bar_height);
   ci::vec2 color_bar_padding_topleft = color_bar_topleft - ci::vec2(color_bar_padding, color_bar_padding);
   ci::vec2 color_bar_padding_bottom_right = color_bar_bottomright + ci::vec2(color_bar_padding, color_bar_padding);
+
+  // Draw the color indicator
   ci::gl::drawStringCentered("Current pen color:",
                              ci::vec2(kWindowWidth - right_margin_width / 2, 100),
                              ci::Color("white"),
@@ -51,9 +55,9 @@ void PictionaryApp::draw() {
 
   if (is_timer_enabled_) {
     ci::Color text_color;
-    if (time_remaining_ < 10) {
+    if (time_remaining_ < kTimeCritical) {
       text_color = ci::Color("red");
-    } else if (time_remaining_ < 20) {
+    } else if (time_remaining_ < kTimeLow) {
       text_color = ci::Color("yellow");
     } else {
       text_color = ci::Color("white");
